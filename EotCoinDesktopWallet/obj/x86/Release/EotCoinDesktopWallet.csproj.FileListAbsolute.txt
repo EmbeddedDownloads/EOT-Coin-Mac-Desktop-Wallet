@@ -1,0 +1,34 @@
+/Users/heinmarais/Projects/EotCoinDesktopWallet/EotCoinDesktopWallet/bin/Release/Eot Coin Wallet.exe
+/Users/heinmarais/Projects/EotCoinDesktopWallet/EotCoinDesktopWallet/bin/Release/NBitcoin.dll
+/Users/heinmarais/Projects/EotCoinDesktopWallet/EotCoinDesktopWallet/bin/Release/Newtonsoft.Json.dll
+/Users/heinmarais/Projects/EotCoinDesktopWallet/EotCoinDesktopWallet/bin/Release/Xamarin.Forms.Core.dll
+/Users/heinmarais/Projects/EotCoinDesktopWallet/EotCoinDesktopWallet/bin/Release/Xamarin.Forms.Platform.dll
+/Users/heinmarais/Projects/EotCoinDesktopWallet/EotCoinDesktopWallet/bin/Release/Xamarin.Forms.Xaml.dll
+/Users/heinmarais/Projects/EotCoinDesktopWallet/EotCoinDesktopWallet/bin/Release/Newtonsoft.Json.xml
+/Users/heinmarais/Projects/EotCoinDesktopWallet/EotCoinDesktopWallet/bin/Release/Xamarin.Forms.Core.pdb
+/Users/heinmarais/Projects/EotCoinDesktopWallet/EotCoinDesktopWallet/bin/Release/Xamarin.Forms.Core.dll.mdb
+/Users/heinmarais/Projects/EotCoinDesktopWallet/EotCoinDesktopWallet/bin/Release/Xamarin.Forms.Core.xml
+/Users/heinmarais/Projects/EotCoinDesktopWallet/EotCoinDesktopWallet/bin/Release/Xamarin.Forms.Platform.pdb
+/Users/heinmarais/Projects/EotCoinDesktopWallet/EotCoinDesktopWallet/bin/Release/Xamarin.Forms.Platform.dll.mdb
+/Users/heinmarais/Projects/EotCoinDesktopWallet/EotCoinDesktopWallet/bin/Release/Xamarin.Forms.Xaml.pdb
+/Users/heinmarais/Projects/EotCoinDesktopWallet/EotCoinDesktopWallet/bin/Release/Xamarin.Forms.Xaml.dll.mdb
+/Users/heinmarais/Projects/EotCoinDesktopWallet/EotCoinDesktopWallet/bin/Release/Xamarin.Forms.Xaml.xml
+/Users/heinmarais/Projects/EotCoinDesktopWallet/EotCoinDesktopWallet/obj/x86/Release/actool/partial-info.plist
+/Users/heinmarais/Projects/EotCoinDesktopWallet/EotCoinDesktopWallet/obj/x86/Release/actool/asset-manifest.plist
+/Users/heinmarais/Projects/EotCoinDesktopWallet/EotCoinDesktopWallet/obj/x86/Release/actool/bundle/AppIcon.icns
+/Users/heinmarais/Projects/EotCoinDesktopWallet/EotCoinDesktopWallet/obj/x86/Release/ibtool-manifests/MainMenu.nib
+/Users/heinmarais/Projects/EotCoinDesktopWallet/EotCoinDesktopWallet/obj/x86/Release/ibtool-manifests/MainWindow.nib
+/Users/heinmarais/Projects/EotCoinDesktopWallet/EotCoinDesktopWallet/obj/x86/Release/ibtool-manifests/LoginWindow.nib
+/Users/heinmarais/Projects/EotCoinDesktopWallet/EotCoinDesktopWallet/obj/x86/Release/ibtool-manifests/GenerateNewWallet.nib
+/Users/heinmarais/Projects/EotCoinDesktopWallet/EotCoinDesktopWallet/obj/x86/Release/ibtool-manifests/AlertWindow.nib
+/Users/heinmarais/Projects/EotCoinDesktopWallet/EotCoinDesktopWallet/obj/x86/Release/ibtool-manifests/ImportPrivateKey.nib
+/Users/heinmarais/Projects/EotCoinDesktopWallet/EotCoinDesktopWallet/obj/x86/Release/ibtool-manifests/StartupWindow.nib
+/Users/heinmarais/Projects/EotCoinDesktopWallet/EotCoinDesktopWallet/obj/x86/Release/ibtool/AlertWindow.nib
+/Users/heinmarais/Projects/EotCoinDesktopWallet/EotCoinDesktopWallet/obj/x86/Release/ibtool/GenerateNewWallet.nib
+/Users/heinmarais/Projects/EotCoinDesktopWallet/EotCoinDesktopWallet/obj/x86/Release/ibtool/ImportPrivateKey.nib
+/Users/heinmarais/Projects/EotCoinDesktopWallet/EotCoinDesktopWallet/obj/x86/Release/ibtool/LoginWindow.nib
+/Users/heinmarais/Projects/EotCoinDesktopWallet/EotCoinDesktopWallet/obj/x86/Release/ibtool/MainMenu.nib
+/Users/heinmarais/Projects/EotCoinDesktopWallet/EotCoinDesktopWallet/obj/x86/Release/ibtool/MainWindow.nib
+/Users/heinmarais/Projects/EotCoinDesktopWallet/EotCoinDesktopWallet/obj/x86/Release/ibtool/StartupWindow.nib
+/Users/heinmarais/Projects/EotCoinDesktopWallet/EotCoinDesktopWallet/obj/x86/Release/EotCoinDesktopWallet.csproj.CoreCompileInputs.cache
+/Users/heinmarais/Projects/EotCoinDesktopWallet/EotCoinDesktopWallet/obj/x86/Release/Eot Coin Wallet.exe
