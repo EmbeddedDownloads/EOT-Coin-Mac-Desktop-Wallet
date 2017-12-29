@@ -91,10 +91,12 @@
 
 @interface MainWindowController : NSWindowController {
 }
+	@property (nonatomic, assign) NSTableColumn * AdditionalInfoColumn;
 	@property (nonatomic, assign) NSTableColumn * AmountColumn;
 	@property (nonatomic, assign) NSTextField * AmountDollar;
 	@property (nonatomic, assign) NSTextField * BalanceNumberLabel;
 	@property (nonatomic, assign) NSTableColumn * DateColumn;
+	@property (nonatomic, assign) NSTableColumn * DescriptionColumn;
 	@property (nonatomic, assign) NSImageView * EOTLogoReceive;
 	@property (nonatomic, assign) NSImageView * EOTLogoSend;
 	@property (nonatomic, assign) NSImageView * ExportEOTLogo;
@@ -103,6 +105,10 @@
 	@property (nonatomic, assign) NSImageView * HistoryEOTLogo;
 	@property (nonatomic, assign) NSTextField * MinerFeesDollar;
 	@property (nonatomic, assign) NSSecureTextField * PasswordBox;
+	@property (nonatomic, assign) NSTableColumn * PasswordColumn;
+	@property (nonatomic, assign) NSSecureTextField * PasswordVaultPassword;
+	@property (nonatomic, assign) NSScrollView * PasswordVaultTable;
+	@property (nonatomic, assign) NSTextView * PasswordVaultText;
 	@property (nonatomic, assign) NSTextFieldCell * QRCodeLabel;
 	@property (nonatomic, assign) NSTextField * RandomCharsBox;
 	@property (nonatomic, assign) NSTextField * SendAmount;
@@ -112,6 +118,7 @@
 	@property (nonatomic, assign) NSTableColumn * StatusColumn;
 	@property (nonatomic, assign) NSTableView * TransactionTable;
 	@property (nonatomic, assign) NSTableHeaderView * TransactionTableHeader;
+	@property (nonatomic, assign) NSTableColumn * UsernameColumn;
 	@property (nonatomic, assign) NSTextField * WalletAddressLabel;
 	@property (nonatomic, assign) NSTextField * WalletBalanceSend;
 	@property (nonatomic, assign) NSTextField * WalletLabel;
@@ -119,6 +126,8 @@
 	-(id) retain;
 	-(int) xamarinGetGCHandle;
 	-(void) xamarinSetGCHandle: (int) gchandle;
+	-(NSTableColumn *) AdditionalInfoColumn;
+	-(void) setAdditionalInfoColumn:(NSTableColumn *)p0;
 	-(NSTableColumn *) AmountColumn;
 	-(void) setAmountColumn:(NSTableColumn *)p0;
 	-(NSTextField *) AmountDollar;
@@ -127,6 +136,8 @@
 	-(void) setBalanceNumberLabel:(NSTextField *)p0;
 	-(NSTableColumn *) DateColumn;
 	-(void) setDateColumn:(NSTableColumn *)p0;
+	-(NSTableColumn *) DescriptionColumn;
+	-(void) setDescriptionColumn:(NSTableColumn *)p0;
 	-(NSImageView *) EOTLogoReceive;
 	-(void) setEOTLogoReceive:(NSImageView *)p0;
 	-(NSImageView *) EOTLogoSend;
@@ -143,6 +154,14 @@
 	-(void) setMinerFeesDollar:(NSTextField *)p0;
 	-(NSSecureTextField *) PasswordBox;
 	-(void) setPasswordBox:(NSSecureTextField *)p0;
+	-(NSTableColumn *) PasswordColumn;
+	-(void) setPasswordColumn:(NSTableColumn *)p0;
+	-(NSSecureTextField *) PasswordVaultPassword;
+	-(void) setPasswordVaultPassword:(NSSecureTextField *)p0;
+	-(NSScrollView *) PasswordVaultTable;
+	-(void) setPasswordVaultTable:(NSScrollView *)p0;
+	-(NSTextView *) PasswordVaultText;
+	-(void) setPasswordVaultText:(NSTextView *)p0;
 	-(NSTextFieldCell *) QRCodeLabel;
 	-(void) setQRCodeLabel:(NSTextFieldCell *)p0;
 	-(NSTextField *) RandomCharsBox;
@@ -161,6 +180,8 @@
 	-(void) setTransactionTable:(NSTableView *)p0;
 	-(NSTableHeaderView *) TransactionTableHeader;
 	-(void) setTransactionTableHeader:(NSTableHeaderView *)p0;
+	-(NSTableColumn *) UsernameColumn;
+	-(void) setUsernameColumn:(NSTableColumn *)p0;
 	-(NSTextField *) WalletAddressLabel;
 	-(void) setWalletAddressLabel:(NSTextField *)p0;
 	-(NSTextField *) WalletBalanceSend;
@@ -168,6 +189,8 @@
 	-(NSTextField *) WalletLabel;
 	-(void) setWalletLabel:(NSTextField *)p0;
 	-(void) awakeFromNib;
+	-(void) DecryptButtonClick:(NSObject *)p0;
+	-(void) EncryptButtonClick:(NSObject *)p0;
 	-(void) ExportSeedButtonClick:(NSObject *)p0;
 	-(void) GenerateWalletButtonClick:(NSObject *)p0;
 	-(void) RefreshButtonClick:(NSObject *)p0;

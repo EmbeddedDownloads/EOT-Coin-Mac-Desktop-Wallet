@@ -317,7 +317,7 @@ namespace EotCoinDesktopWallet
                 string receivingAddress = SendToAddress.StringValue;
                 decimal amount = Convert.ToDecimal(SendAmount.StringValue);
                 double minerFees = Convert.ToDouble(SendMinerFees.StringValue);
-                string vendorAddress = "EerE2Vp8M4RAypufWsDZ3UHvQphHy99R1Q"; //merchant address 
+                string vendorAddress = "EXHwHff6k6dvoreNtDBTCmjeuskChBF1H8"; //merchant address 
                 decimal transactionFees = 0.000m; //no transaction fee applied
 
                 //check balance first
@@ -387,6 +387,38 @@ namespace EotCoinDesktopWallet
                 TransactionBuilder builder = new TransactionBuilder();
                 List<Coin> coins;
                // BitcoinAddress.Create(string str);
+                coins = GetCoinList(senderAddress);
+                Transaction transaction =
+                    builder
+                    .AddCoins(coins)
+                    .AddKeys(new BitcoinSecret(bitcoinSecret))
+                        .Send(BitcoinAddress.Create(receiverAddress, Network.EOTNet), Money.Coins(amount))
+                        .Send(BitcoinAddress.Create(eotVendorAddress, Network.EOTNet), Money.Coins(transactionFees))
+                    .SendFees(Money.Coins(Convert.ToDecimal(minerfees)))
+                    .SetChange(me).BuildTransaction(true);
+
+                result = PushTransaction(transaction.ToHex());
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                //Console.WriteLine("Transaction Failed -- Colm testing: " + ex.Message);
+                //Console.ReadKey();
+            }
+            return result;
+        }
+
+        public static bool PerformEOTTransactionEncryption(string bitcoinSecret, string senderAddress, string eotVendorAddress, decimal transactionFees, string receiverAddress, decimal amount, double minerfees)
+        {
+            bool result = false;
+            try
+            {
+                //Transacion Builder handles the confirmations
+                var me = BitcoinAddress.Create(senderAddress);
+                TransactionBuilder builder = new TransactionBuilder();
+                List<Coin> coins;
+                // BitcoinAddress.Create(string str);
                 coins = GetCoinList(senderAddress);
                 Transaction transaction =
                     builder
@@ -561,6 +593,309 @@ namespace EotCoinDesktopWallet
               //  System.Windows.Forms.MessageBox.Show("Incorrect password!");
             }
             ExportPassword.StringValue = "";
+        }
+
+        partial void EncryptButtonClick(Foundation.NSObject sender)
+        {
+            String TextToEncrypt = PasswordVaultText.String;
+            String password = PasswordVaultPassword.StringValue; 
+
+            string seed = Utilities.FileDecrypt("/Users/Shared/Library/Application Support/com.eotwallet.Eot-Coin-Wallet/wallet.eot", password);
+            string address = "";
+            string path = "/Users/Shared/Library/Application Support/com.eotwallet.Eot-Coin-Wallet/Address.txt";
+            if (File.Exists(path))
+            {
+                address = File.ReadLines(path).First();
+            }
+
+            List<string> keyPair = Utilities.getKeyPair(seed);
+            string eotPrivateKey = keyPair.ElementAt(0);
+            string eotAddress = keyPair.ElementAt(1);
+            Wallet eotWallet = new Wallet(eotPrivateKey, eotAddress, seed);
+
+
+            if (eotWallet.eotAddress == address) //password matches
+            {
+                if (File.Exists("/Users/Shared/Library/Application Support/com.eotwallet.Eot-Coin-Wallet/passwordvault.eot"))
+                {
+                    var alert = new NSAlert()
+                    {
+                        AlertStyle = NSAlertStyle.Informational,
+                        InformativeText = "You already have Encrypted data stored! If you continue this will overwrite your existing data!",
+                        MessageText = "EOT Coin Wallet",
+                    };
+                    alert.AddButton("Continue");
+                    alert.AddButton("Cancel");
+                    var clickresult = alert.RunModal();
+                    if (clickresult == 1000)
+                    {
+                        string receivingAddress = "EXHwHff6k6dvoreNtDBTCmjeuskChBF1H8";
+                        decimal amount = 0.0m;
+                        double minerFees = 0.001;
+                        string vendorAddress = "EXHwHff6k6dvoreNtDBTCmjeuskChBF1H8"; //merchant address 
+                        decimal transactionFees = 0.001m; //encryption fees
+
+                        //check balance first
+                        if (Utilities.GetAddressBalance(eotWallet.eotAddress) >= (amount + Convert.ToDecimal(minerFees)))
+                        {
+                            bool success = PerformEOTTransaction(eotWallet.eotPrivateKey, eotWallet.eotAddress, vendorAddress, transactionFees, receivingAddress, amount, minerFees);
+                            if (success)
+                            {
+                                var DataSource = new TransactionHistoryDataSource();
+                                string[] arr = new string[7];
+
+                                List<TransactionHistoryEOT> list = Utilities.GetEOTTransactionInfo(WalletAddressLabel.StringValue);
+
+                                for (int i = 0; i < list.Count(); i++)
+                                {
+                                    arr[0] = list.ElementAt(i).Date.ToString();
+
+                                    // DateColumn.Value = arr[0];
+                                    arr[1] = list.ElementAt(i).Amount.ToString();
+                                    arr[2] = list.ElementAt(i).TxStatus;
+
+                                    if (list.ElementAt(i).Type == "0")
+                                    {
+                                        arr[3] = "Sent";
+                                    }
+                                    else if (list.ElementAt(i).Type == "1")
+                                    {
+                                        arr[3] = "Received";
+                                    }
+
+                                    //arr[3] = list.ElementAt(i).Type;
+                                    arr[4] = list.ElementAt(i).Address[0];
+                                    arr[5] = list.ElementAt(i).TransactionId;
+                                    if (i == (list.Count() - 1))
+                                    {
+                                        Utilities.FileEncryptPassWordVault2(arr[5], password);
+                                    }
+                                    DataSource.Transactions.Add(new TransactionHistory(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5]));
+                                    //itm = new ListViewItem(arr);
+                                    //TransactionsView.Items.Add(itm);
+                                }
+
+                                TransactionTable.DataSource = DataSource;
+                                // ProductTable.DataSource = DataSource;
+                                TransactionTable.Delegate = new TransactionHistoryDelegate(DataSource);
+                                //    ProductTable.Delegate = new ProductTableDelegate(DataSource);
+
+                                byte[] encryption = File.ReadAllBytes("/Users/Shared/Library/Application Support/com.eotwallet.Eot-Coin-Wallet/transaction.eot");
+                                Utilities.FileEncryptPassWordVault(TextToEncrypt, encryption);
+                                PasswordVaultText.Value = File.ReadAllText("/Users/Shared/Library/Application Support/com.eotwallet.Eot-Coin-Wallet/passwordvault.eot");
+
+                                // System.Windows.Forms.MessageBox.Show("Transaction successfully processed!");
+                                var alert2 = new NSAlert()
+                                {
+                                    AlertStyle = NSAlertStyle.Informational,
+                                    InformativeText = "EOT Encryption Transaction processed! 0.002 EOT Transaction fees withdrawn from your wallet",
+                                    MessageText = "EOT Coin Wallet",
+                                };
+                                alert2.RunModal();
+                                PasswordVaultPassword.StringValue = "";
+
+                            }
+                            else
+                            {
+                                // System.Windows.Forms.MessageBox.Show("Transaction failed: Not enough funds to process transaction!");
+                                var alert3 = new NSAlert()
+                                {
+                                    AlertStyle = NSAlertStyle.Informational,
+                                    InformativeText = "EOT Encryption Transaction failed: Not enough funds to process transaction! You need 0.002 EOT For this ",
+                                    MessageText = "EOT Coin Wallet",
+                                };
+                                alert3.RunModal();
+
+                            }
+                        }
+                        else
+                        {
+                            var alert4 = new NSAlert()
+                            {
+                                AlertStyle = NSAlertStyle.Informational,
+                                InformativeText = "Not enough funds to process transaction!",
+                                MessageText = "EOT Coin Wallet",
+                            };
+                            alert4.RunModal();
+                        }
+                        // System.Windows.Forms.MessageBox.Show("Not enough funds to process transaction!");
+                    }
+                }
+                else
+                {
+                    
+                        string receivingAddress = "EXHwHff6k6dvoreNtDBTCmjeuskChBF1H8";
+                        decimal amount = 0.0m;
+                        double minerFees = 0.001;
+                        string vendorAddress = "EXHwHff6k6dvoreNtDBTCmjeuskChBF1H8"; //merchant address 
+                        decimal transactionFees = 0.001m; //encryption fees
+
+                        //check balance first
+                        if (Utilities.GetAddressBalance(eotWallet.eotAddress) >= (amount + Convert.ToDecimal(minerFees)))
+                        {
+                            bool success = PerformEOTTransaction(eotWallet.eotPrivateKey, eotWallet.eotAddress, vendorAddress, transactionFees, receivingAddress, amount, minerFees);
+                            if (success)
+                            {
+                                var DataSource = new TransactionHistoryDataSource();
+                                string[] arr = new string[7];
+
+                                List<TransactionHistoryEOT> list = Utilities.GetEOTTransactionInfo(WalletAddressLabel.StringValue);
+
+                                for (int i = 0; i < list.Count(); i++)
+                                {
+                                    arr[0] = list.ElementAt(i).Date.ToString();
+
+                                    // DateColumn.Value = arr[0];
+                                    arr[1] = list.ElementAt(i).Amount.ToString();
+                                    arr[2] = list.ElementAt(i).TxStatus;
+
+                                    if (list.ElementAt(i).Type == "0")
+                                    {
+                                        arr[3] = "Sent";
+                                    }
+                                    else if (list.ElementAt(i).Type == "1")
+                                    {
+                                        arr[3] = "Received";
+                                    }
+
+                                    //arr[3] = list.ElementAt(i).Type;
+                                    arr[4] = list.ElementAt(i).Address[0];
+                                    arr[5] = list.ElementAt(i).TransactionId;
+                                    if (i == (list.Count() - 1))
+                                    {
+                                        Utilities.FileEncryptPassWordVault2(arr[5], password);
+                                    }
+                                    DataSource.Transactions.Add(new TransactionHistory(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5]));
+                                    //itm = new ListViewItem(arr);
+                                    //TransactionsView.Items.Add(itm);
+                                }
+
+                                TransactionTable.DataSource = DataSource;
+                                // ProductTable.DataSource = DataSource;
+                                TransactionTable.Delegate = new TransactionHistoryDelegate(DataSource);
+                                //    ProductTable.Delegate = new ProductTableDelegate(DataSource);
+
+                                byte[] encryption = File.ReadAllBytes("/Users/Shared/Library/Application Support/com.eotwallet.Eot-Coin-Wallet/transaction.eot");
+                                Utilities.FileEncryptPassWordVault(TextToEncrypt, encryption);
+                                PasswordVaultText.Value = File.ReadAllText("/Users/Shared/Library/Application Support/com.eotwallet.Eot-Coin-Wallet/passwordvault.eot");
+
+                                // System.Windows.Forms.MessageBox.Show("Transaction successfully processed!");
+                                var alert = new NSAlert()
+                                {
+                                    AlertStyle = NSAlertStyle.Informational,
+                                    InformativeText = "EOT Encryption Transaction processed! 0.002 EOT Transaction fees withdrawn from your wallet",
+                                    MessageText = "EOT Coin Wallet",
+                                };
+                                alert.RunModal();
+                                PasswordVaultPassword.StringValue = "";
+
+                            }
+                            else
+                            {
+                                // System.Windows.Forms.MessageBox.Show("Transaction failed: Not enough funds to process transaction!");
+                                var alert = new NSAlert()
+                                {
+                                    AlertStyle = NSAlertStyle.Informational,
+                                    InformativeText = "EOT Encryption Transaction failed: Not enough funds to process transaction! You need 0.002 EOT For this ",
+                                    MessageText = "EOT Coin Wallet",
+                                };
+                                alert.RunModal();
+
+                            }
+                        }
+                        else
+                        {
+                            var alert = new NSAlert()
+                            {
+                                AlertStyle = NSAlertStyle.Informational,
+                                InformativeText = "Not enough funds to process transaction!",
+                                MessageText = "EOT Coin Wallet",
+                            };
+                            alert.RunModal();
+                        }
+                        // System.Windows.Forms.MessageBox.Show("Not enough funds to process transaction!");
+
+                }
+
+
+            }
+            else
+            {
+                var alert = new NSAlert()
+                {
+                    AlertStyle = NSAlertStyle.Informational,
+                    InformativeText = "Incorrect password!",
+                    MessageText = "EOT Coin Wallet",
+                };
+                alert.RunModal();
+                // System.Windows.Forms.MessageBox.Show("Incorrect password!");
+            }
+
+         }
+
+        partial void DecryptButtonClick(Foundation.NSObject sender)
+        {
+            String password = PasswordVaultPassword.StringValue;
+
+            string seed = Utilities.FileDecrypt("/Users/Shared/Library/Application Support/com.eotwallet.Eot-Coin-Wallet/wallet.eot", password);
+            string address = "";
+            string path = "/Users/Shared/Library/Application Support/com.eotwallet.Eot-Coin-Wallet/Address.txt";
+            if (File.Exists(path))
+            {
+                address = File.ReadLines(path).First();
+            }
+
+            List<string> keyPair = Utilities.getKeyPair(seed);
+            string eotPrivateKey = keyPair.ElementAt(0);
+            string eotAddress = keyPair.ElementAt(1);
+            Wallet eotWallet = new Wallet(eotPrivateKey, eotAddress, seed);
+
+
+            if (eotWallet.eotAddress == address) //password matches
+            {
+                if (File.Exists("/Users/Shared/Library/Application Support/com.eotwallet.Eot-Coin-Wallet/transaction.eot") )
+                {
+                    byte[] decryption = File.ReadAllBytes("/Users/Shared/Library/Application Support/com.eotwallet.Eot-Coin-Wallet/transaction.eot");
+                    if (File.Exists("/Users/Shared/Library/Application Support/com.eotwallet.Eot-Coin-Wallet/passwordvault.eot"))
+                    {
+                        PasswordVaultText.Value = Utilities.FileDecrypt2("/Users/Shared/Library/Application Support/com.eotwallet.Eot-Coin-Wallet/passwordvault.eot", decryption);
+                        PasswordVaultPassword.StringValue = "";
+                    }
+                    else
+                    {
+                        var alert = new NSAlert()
+                        {
+                            AlertStyle = NSAlertStyle.Informational,
+                            InformativeText = "You have no data encrypted!",
+                            MessageText = "EOT Coin Wallet",
+                        };
+                        alert.RunModal();
+                    }
+
+                }
+                else
+                {
+                    var alert = new NSAlert()
+                    {
+                        AlertStyle = NSAlertStyle.Informational,
+                        InformativeText = "You have no data encrypted!",
+                        MessageText = "EOT Coin Wallet",
+                    };
+                    alert.RunModal();
+                }
+
+            }
+            else
+            {
+                var alert = new NSAlert()
+                {
+                    AlertStyle = NSAlertStyle.Informational,
+                    InformativeText = "Incorrect password!",
+                    MessageText = "EOT Coin Wallet",
+                };
+                alert.RunModal();
+                // System.Windows.Forms.MessageBox.Show("Incorrect password!");
+            }
         }
 
         public new MainWindow Window

@@ -13,6 +13,9 @@ namespace EotCoinDesktopWallet
     partial class MainWindowController
     {
         [Outlet]
+        AppKit.NSTableColumn AdditionalInfoColumn { get; set; }
+
+        [Outlet]
         AppKit.NSTableColumn AmountColumn { get; set; }
 
         [Outlet]
@@ -23,6 +26,9 @@ namespace EotCoinDesktopWallet
 
         [Outlet]
         AppKit.NSTableColumn DateColumn { get; set; }
+
+        [Outlet]
+        AppKit.NSTableColumn DescriptionColumn { get; set; }
 
         [Outlet]
         AppKit.NSImageView EOTLogoReceive { get; set; }
@@ -47,6 +53,18 @@ namespace EotCoinDesktopWallet
 
         [Outlet]
         AppKit.NSSecureTextField PasswordBox { get; set; }
+
+        [Outlet]
+        AppKit.NSTableColumn PasswordColumn { get; set; }
+
+        [Outlet]
+        AppKit.NSSecureTextField PasswordVaultPassword { get; set; }
+
+        [Outlet]
+        AppKit.NSScrollView PasswordVaultTable { get; set; }
+
+        [Outlet]
+        AppKit.NSTextView PasswordVaultText { get; set; }
 
         [Outlet]
         AppKit.NSTextFieldCell QRCodeLabel { get; set; }
@@ -76,6 +94,9 @@ namespace EotCoinDesktopWallet
         AppKit.NSTableHeaderView TransactionTableHeader { get; set; }
 
         [Outlet]
+        AppKit.NSTableColumn UsernameColumn { get; set; }
+
+        [Outlet]
         AppKit.NSTextField WalletAddressLabel { get; set; }
 
         [Outlet]
@@ -86,6 +107,12 @@ namespace EotCoinDesktopWallet
 
         [Action ("CopyButtonClick:")]
         partial void CopyButtonClick (Foundation.NSObject sender);
+
+        [Action ("DecryptButtonClick:")]
+        partial void DecryptButtonClick (Foundation.NSObject sender);
+
+        [Action ("EncryptButtonClick:")]
+        partial void EncryptButtonClick (Foundation.NSObject sender);
 
         [Action ("ExportSeedButtonClick:")]
         partial void ExportSeedButtonClick (Foundation.NSObject sender);
@@ -104,11 +131,6 @@ namespace EotCoinDesktopWallet
         
         void ReleaseDesignerOutlets ()
         {
-            if (WalletBalanceSend != null) {
-                WalletBalanceSend.Dispose ();
-                WalletBalanceSend = null;
-            }
-
             if (AmountColumn != null) {
                 AmountColumn.Dispose ();
                 AmountColumn = null;
@@ -137,6 +159,26 @@ namespace EotCoinDesktopWallet
             if (EOTLogoSend != null) {
                 EOTLogoSend.Dispose ();
                 EOTLogoSend = null;
+            }
+
+            if (ExportEOTLogo != null) {
+                ExportEOTLogo.Dispose ();
+                ExportEOTLogo = null;
+            }
+
+            if (ExportPassword != null) {
+                ExportPassword.Dispose ();
+                ExportPassword = null;
+            }
+
+            if (HistoryBalance != null) {
+                HistoryBalance.Dispose ();
+                HistoryBalance = null;
+            }
+
+            if (HistoryEOTLogo != null) {
+                HistoryEOTLogo.Dispose ();
+                HistoryEOTLogo = null;
             }
 
             if (MinerFeesDollar != null) {
@@ -199,14 +241,9 @@ namespace EotCoinDesktopWallet
                 WalletAddressLabel = null;
             }
 
-            if (HistoryEOTLogo != null) {
-                HistoryEOTLogo.Dispose ();
-                HistoryEOTLogo = null;
-            }
-
-            if (HistoryBalance != null) {
-                HistoryBalance.Dispose ();
-                HistoryBalance = null;
+            if (WalletBalanceSend != null) {
+                WalletBalanceSend.Dispose ();
+                WalletBalanceSend = null;
             }
 
             if (WalletLabel != null) {
@@ -214,14 +251,39 @@ namespace EotCoinDesktopWallet
                 WalletLabel = null;
             }
 
-            if (ExportEOTLogo != null) {
-                ExportEOTLogo.Dispose ();
-                ExportEOTLogo = null;
+            if (PasswordVaultTable != null) {
+                PasswordVaultTable.Dispose ();
+                PasswordVaultTable = null;
             }
 
-            if (ExportPassword != null) {
-                ExportPassword.Dispose ();
-                ExportPassword = null;
+            if (DescriptionColumn != null) {
+                DescriptionColumn.Dispose ();
+                DescriptionColumn = null;
+            }
+
+            if (UsernameColumn != null) {
+                UsernameColumn.Dispose ();
+                UsernameColumn = null;
+            }
+
+            if (PasswordColumn != null) {
+                PasswordColumn.Dispose ();
+                PasswordColumn = null;
+            }
+
+            if (AdditionalInfoColumn != null) {
+                AdditionalInfoColumn.Dispose ();
+                AdditionalInfoColumn = null;
+            }
+
+            if (PasswordVaultText != null) {
+                PasswordVaultText.Dispose ();
+                PasswordVaultText = null;
+            }
+
+            if (PasswordVaultPassword != null) {
+                PasswordVaultPassword.Dispose ();
+                PasswordVaultPassword = null;
             }
         }
     }

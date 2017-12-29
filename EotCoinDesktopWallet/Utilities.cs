@@ -418,6 +418,94 @@ namespace EotCoinDesktopWallet
             }
         }
 
+
+        public static void FileEncryptPassWordVault(string texttoencrypt, byte[] password)
+        {
+            byte[] salt = GenerateRandomSalt();
+
+            FileStream fsCrypt = new FileStream("/Users/Shared/Library/Application Support/com.eotwallet.Eot-Coin-Wallet/passwordvault.eot", FileMode.Create);
+
+            // byte[] passwordBytes = System.Text.Encoding.UTF8.GetBytes(password);
+            byte[] passwordBytes = password;
+
+            RijndaelManaged AES = new RijndaelManaged();
+            AES.KeySize = 256;
+            AES.BlockSize = 128;
+            AES.Padding = PaddingMode.PKCS7;
+
+            var key = new Rfc2898DeriveBytes(passwordBytes, salt, 50000);
+            AES.Key = key.GetBytes(AES.KeySize / 8);
+            AES.IV = key.GetBytes(AES.BlockSize / 8);
+
+            //Cipher modes: http://security.stackexchange.com/questions/52665/which-is-the-best-cipher-mode-and-padding-mode-for-aes-encryption
+            AES.Mode = CipherMode.CFB;
+
+            fsCrypt.Write(salt, 0, salt.Length);
+
+            CryptoStream cs = new CryptoStream(fsCrypt, AES.CreateEncryptor(), CryptoStreamMode.Write);
+
+            byte[] buffer = ASCIIEncoding.ASCII.GetBytes(texttoencrypt);
+            int read = buffer.Length;
+
+            try
+            {
+                cs.Write(buffer, 0, read);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+            }
+            finally
+            {
+                cs.Close();
+                fsCrypt.Close();
+            }
+        }
+
+
+
+        public static void FileEncryptPassWordVault2(string texttoencrypt, string password)
+        {
+            byte[] salt = GenerateRandomSalt();
+
+            FileStream fsCrypt = new FileStream("/Users/Shared/Library/Application Support/com.eotwallet.Eot-Coin-Wallet/transaction.eot", FileMode.Create);
+
+            byte[] passwordBytes = System.Text.Encoding.UTF8.GetBytes(password);
+
+            RijndaelManaged AES = new RijndaelManaged();
+            AES.KeySize = 256;
+            AES.BlockSize = 128;
+            AES.Padding = PaddingMode.PKCS7;
+
+            var key = new Rfc2898DeriveBytes(passwordBytes, salt, 50000);
+            AES.Key = key.GetBytes(AES.KeySize / 8);
+            AES.IV = key.GetBytes(AES.BlockSize / 8);
+
+            //Cipher modes: http://security.stackexchange.com/questions/52665/which-is-the-best-cipher-mode-and-padding-mode-for-aes-encryption
+            AES.Mode = CipherMode.CFB;
+
+            fsCrypt.Write(salt, 0, salt.Length);
+
+            CryptoStream cs = new CryptoStream(fsCrypt, AES.CreateEncryptor(), CryptoStreamMode.Write);
+
+            byte[] buffer = ASCIIEncoding.ASCII.GetBytes(texttoencrypt);
+            int read = buffer.Length;
+
+            try
+            {
+                cs.Write(buffer, 0, read);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+            }
+            finally
+            {
+                cs.Close();
+                fsCrypt.Close();
+            }
+        }
+
         /// <summary>
         /// Decrypts an encrypted file with the FileEncrypt method through its path and the plain password.
         /// </summary>
@@ -427,6 +515,60 @@ namespace EotCoinDesktopWallet
         public static string FileDecrypt(string inputFile, string password)
         {
             byte[] passwordBytes = System.Text.Encoding.UTF8.GetBytes(password);
+            byte[] salt = new byte[32];
+
+            FileStream fsCrypt = new FileStream(inputFile, FileMode.Open);
+            fsCrypt.Read(salt, 0, salt.Length);
+
+            RijndaelManaged AES = new RijndaelManaged();
+            AES.KeySize = 256;
+            AES.BlockSize = 128;
+            var key = new Rfc2898DeriveBytes(passwordBytes, salt, 50000);
+            AES.Key = key.GetBytes(AES.KeySize / 8);
+            AES.IV = key.GetBytes(AES.BlockSize / 8);
+            AES.Padding = PaddingMode.PKCS7;
+            AES.Mode = CipherMode.CFB;
+
+            CryptoStream cs = new CryptoStream(fsCrypt, AES.CreateDecryptor(), CryptoStreamMode.Read);
+
+
+            int read;
+            byte[] buffer = new byte[121];
+            try
+            {
+                while ((read = cs.Read(buffer, 0, buffer.Length)) > 0)
+                {
+                }
+            }
+            catch (CryptographicException ex_CryptographicException)
+            {
+                Console.WriteLine("CryptographicException error: " + ex_CryptographicException.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+            }
+
+            try
+            {
+                cs.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error by closing CryptoStream: " + ex.Message);
+            }
+            finally
+            {
+                fsCrypt.Close();
+            }
+            string seed = System.Text.ASCIIEncoding.Default.GetString(buffer);
+            return seed;
+        }
+
+        public static string FileDecrypt2(string inputFile, byte[] password)
+        {
+            //byte[] passwordBytes = System.Text.Encoding.UTF8.GetBytes(password);
+            byte[] passwordBytes = password; 
             byte[] salt = new byte[32];
 
             FileStream fsCrypt = new FileStream(inputFile, FileMode.Open);

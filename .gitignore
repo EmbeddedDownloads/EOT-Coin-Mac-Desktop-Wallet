@@ -1,0 +1,43 @@
+
+EotCoinDesktopWallet/bin/Debug/Eot Coin Wallet.app/Contents/MacOS/Eot Coin Wallet
+*.exe
+EotCoinDesktopWallet/bin/Debug/Eot Coin Wallet.app/Contents/MacOS/Eot Coin Wallet.dSYM/Contents/Resources/DWARF/Eot Coin Wallet
+EotCoinDesktopWallet/bin/Debug/Eot Coin Wallet.app/Contents/MonoBundle/config
+EotCoinDesktopWallet/bin/Debug/Eot Coin Wallet.app/Contents/MonoBundle/Eot Coin Wallet.pdb
+*.dylib
+*.dll
+*.pdb
+EotCoinDesktopWallet/bin/Debug/Eot Coin Wallet.app/Contents/Info.plist
+EotCoinDesktopWallet/bin/Debug/Eot Coin Wallet.app/Contents/MacOS/Eot Coin Wallet.dSYM/Contents/Info.plist
+*.mdb
+*.nib
+EotCoinDesktopWallet/bin/Debug/Eot Coin Wallet.app/Contents/Resources/alert.png
+EotCoinDesktopWallet/bin/Debug/Eot Coin Wallet.app/Contents/Resources/AppIcon.icns
+EotCoinDesktopWallet/bin/Debug/Eot Coin Wallet.app/Contents/Resources/EOT-3.png
+EotCoinDesktopWallet/bin/Debug/Eot Coin Wallet.app/Contents/Resources/runtime-options.plist
+EotCoinDesktopWallet/bin/Debug/Newtonsoft.Json.xml
+EotCoinDesktopWallet/bin/Debug/stderr.log
+EotCoinDesktopWallet/bin/Debug/Eot Coin Wallet.app/Contents/PkgInfo
+EotCoinDesktopWallet/bin/Debug/stdout.log
+EotCoinDesktopWallet/bin/Debug/Xamarin.Forms.Core.xml
+EotCoinDesktopWallet/bin/Debug/Xamarin.Forms.Xaml.xml
+EotCoinDesktopWallet/bin/Release/Eot Coin Wallet-1.0.pkg
+EotCoinDesktopWallet/bin/Release/Eot Coin Wallet-2.0.pkg
+EotCoinDesktopWallet/bin/Release/Eot Coin Wallet.app/Contents/Info.plist
+EotCoinDesktopWallet/bin/Release/Eot Coin Wallet.app/Contents/MacOS/Eot Coin Wallet
+EotCoinDesktopWallet/bin/Release/Eot Coin Wallet.app/Contents/MonoBundle/config
+EotCoinDesktopWallet/bin/Release/Eot Coin Wallet.app/Contents/PkgInfo
+EotCoinDesktopWallet/bin/Release/Eot Coin Wallet.app/Contents/Resources/alert.png
+EotCoinDesktopWallet/bin/Release/Eot Coin Wallet.app/Contents/Resources/AppIcon.icns
+EotCoinDesktopWallet/bin/Release/Eot Coin Wallet.app/Contents/Resources/EOT-3.png
+EotCoinDesktopWallet/bin/Release/Eot Coin Wallet.app/Contents/Resources/runtime-options.plist
+EotCoinDesktopWallet/bin/Release/Newtonsoft.Json.xml
+EotCoinDesktopWallet/bin/Release/stderr.log
+EotCoinDesktopWallet/bin/Release/stdout.log
+EotCoinDesktopWallet/bin/Release/Xamarin.Forms.Core.xml
+EotCoinDesktopWallet/bin/Release/Xamarin.Forms.Xaml.xml
+*.exe
+*.exe
+EotCoinDesktopWallet/obj/x86/Debug/Eot Coin Wallet.exe
+*.pdb
+*.nib

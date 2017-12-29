@@ -1,14 +1,14 @@
 ﻿<Properties StartupConfiguration="{61F5E7F9-7F24-4362-BB52-22C0B8CE4519}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="EotCoinDesktopWallet/LoginWindowController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="EotCoinDesktopWallet/MainWindowController.cs">
     <Files>
       <File FileName="EotCoinDesktopWallet/AppDelegate.cs" Line="26" Column="100" />
-      <File FileName="EotCoinDesktopWallet/MainWindowController.cs" Line="65" Column="100" />
-      <File FileName="EotCoinDesktopWallet/MainWindowController.designer.cs" Line="229" Column="1" />
+      <File FileName="EotCoinDesktopWallet/MainWindowController.cs" Line="719" Column="50" />
+      <File FileName="EotCoinDesktopWallet/MainWindowController.designer.cs" Line="288" Column="1" />
       <File FileName="EotCoinDesktopWallet/GenerateNewWallet.cs" Line="1" Column="1" />
-      <File FileName="EotCoinDesktopWallet/GenerateNewWalletController.cs" Line="35" Column="63" />
-      <File FileName="EotCoinDesktopWallet/Utilities.cs" Line="488" Column="14" />
+      <File FileName="EotCoinDesktopWallet/GenerateNewWalletController.cs" Line="87" Column="59" />
+      <File FileName="EotCoinDesktopWallet/Utilities.cs" Line="476" Column="27" />
       <File FileName="EotCoinDesktopWallet/TransactionHistoryDataSource.cs" Line="19" Column="10" />
-      <File FileName="EotCoinDesktopWallet/TransactionHistory.cs" Line="27" Column="48" />
+      <File FileName="EotCoinDesktopWallet/TransactionHistory.cs" Line="22" Column="1" />
       <File FileName="EotCoinDesktopWallet/TransactionHistoryEOT.cs" Line="7" Column="31" />
       <File FileName="EotCoinDesktopWallet/Info.plist" />
       <File FileName="EotCoinDesktopWallet/ImportPrivateKey.cs" Line="12" Column="10" />
@@ -18,7 +18,9 @@
       <File FileName="EotCoinDesktopWallet/StartupWindowController.cs" Line="43" Column="26" />
       <File FileName="EotCoinDesktopWallet/StartupWindowController.designer.cs" Line="33" Column="1" />
       <File FileName="../../../../Library/Frameworks/Xamarin.Mac.framework/Versions/4.0.0.214/lib/msbuild/Xamarin.Mac.Common.targets" Line="289" Column="18" />
-      <File FileName="EotCoinDesktopWallet/LoginWindowController.cs" Line="41" Column="126" />
+      <File FileName="EotCoinDesktopWallet/LoginWindowController.cs" Line="81" Column="10" />
+      <File FileName="EotCoinDesktopWallet/TransactionHistoryDelegate.cs" Line="1" Column="1" />
+      <File FileName="EotCoinDesktopWallet/Main.cs" Line="10" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
