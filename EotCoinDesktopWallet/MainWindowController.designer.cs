@@ -25,7 +25,25 @@ namespace EotCoinDesktopWallet
         AppKit.NSTextField BalanceNumberLabel { get; set; }
 
         [Outlet]
+        AppKit.NSButton CryptoDocDecryptButton { get; set; }
+
+        [Outlet]
+        AppKit.NSButton CryptoDocEncryptButton { get; set; }
+
+        [Outlet]
+        AppKit.NSSecureTextField CryptoDocPassword { get; set; }
+
+        [Outlet]
+        AppKit.NSTabViewItem CryptoDocTabView { get; set; }
+
+        [Outlet]
         AppKit.NSTableColumn DateColumn { get; set; }
+
+        [Outlet]
+        AppKit.NSButton DeleteEnctrypted { get; set; }
+
+        [Outlet]
+        AppKit.NSButton DeleteOriginal { get; set; }
 
         [Outlet]
         AppKit.NSTableColumn DescriptionColumn { get; set; }
@@ -108,6 +126,12 @@ namespace EotCoinDesktopWallet
         [Action ("CopyButtonClick:")]
         partial void CopyButtonClick (Foundation.NSObject sender);
 
+        [Action ("CryptoDocDecryptButtonClick:")]
+        partial void CryptoDocDecryptButtonClick (Foundation.NSObject sender);
+
+        [Action ("CryptoDocOpenButtonClick:")]
+        partial void CryptoDocOpenButtonClick (Foundation.NSObject sender);
+
         [Action ("DecryptButtonClick:")]
         partial void DecryptButtonClick (Foundation.NSObject sender);
 
@@ -131,6 +155,11 @@ namespace EotCoinDesktopWallet
         
         void ReleaseDesignerOutlets ()
         {
+            if (AdditionalInfoColumn != null) {
+                AdditionalInfoColumn.Dispose ();
+                AdditionalInfoColumn = null;
+            }
+
             if (AmountColumn != null) {
                 AmountColumn.Dispose ();
                 AmountColumn = null;
@@ -146,9 +175,34 @@ namespace EotCoinDesktopWallet
                 BalanceNumberLabel = null;
             }
 
+            if (CryptoDocDecryptButton != null) {
+                CryptoDocDecryptButton.Dispose ();
+                CryptoDocDecryptButton = null;
+            }
+
+            if (CryptoDocEncryptButton != null) {
+                CryptoDocEncryptButton.Dispose ();
+                CryptoDocEncryptButton = null;
+            }
+
+            if (CryptoDocPassword != null) {
+                CryptoDocPassword.Dispose ();
+                CryptoDocPassword = null;
+            }
+
+            if (CryptoDocTabView != null) {
+                CryptoDocTabView.Dispose ();
+                CryptoDocTabView = null;
+            }
+
             if (DateColumn != null) {
                 DateColumn.Dispose ();
                 DateColumn = null;
+            }
+
+            if (DescriptionColumn != null) {
+                DescriptionColumn.Dispose ();
+                DescriptionColumn = null;
             }
 
             if (EOTLogoReceive != null) {
@@ -189,6 +243,26 @@ namespace EotCoinDesktopWallet
             if (PasswordBox != null) {
                 PasswordBox.Dispose ();
                 PasswordBox = null;
+            }
+
+            if (PasswordColumn != null) {
+                PasswordColumn.Dispose ();
+                PasswordColumn = null;
+            }
+
+            if (PasswordVaultPassword != null) {
+                PasswordVaultPassword.Dispose ();
+                PasswordVaultPassword = null;
+            }
+
+            if (PasswordVaultTable != null) {
+                PasswordVaultTable.Dispose ();
+                PasswordVaultTable = null;
+            }
+
+            if (PasswordVaultText != null) {
+                PasswordVaultText.Dispose ();
+                PasswordVaultText = null;
             }
 
             if (QRCodeLabel != null) {
@@ -236,6 +310,11 @@ namespace EotCoinDesktopWallet
                 TransactionTableHeader = null;
             }
 
+            if (UsernameColumn != null) {
+                UsernameColumn.Dispose ();
+                UsernameColumn = null;
+            }
+
             if (WalletAddressLabel != null) {
                 WalletAddressLabel.Dispose ();
                 WalletAddressLabel = null;
@@ -251,39 +330,14 @@ namespace EotCoinDesktopWallet
                 WalletLabel = null;
             }
 
-            if (PasswordVaultTable != null) {
-                PasswordVaultTable.Dispose ();
-                PasswordVaultTable = null;
+            if (DeleteEnctrypted != null) {
+                DeleteEnctrypted.Dispose ();
+                DeleteEnctrypted = null;
             }
 
-            if (DescriptionColumn != null) {
-                DescriptionColumn.Dispose ();
-                DescriptionColumn = null;
-            }
-
-            if (UsernameColumn != null) {
-                UsernameColumn.Dispose ();
-                UsernameColumn = null;
-            }
-
-            if (PasswordColumn != null) {
-                PasswordColumn.Dispose ();
-                PasswordColumn = null;
-            }
-
-            if (AdditionalInfoColumn != null) {
-                AdditionalInfoColumn.Dispose ();
-                AdditionalInfoColumn = null;
-            }
-
-            if (PasswordVaultText != null) {
-                PasswordVaultText.Dispose ();
-                PasswordVaultText = null;
-            }
-
-            if (PasswordVaultPassword != null) {
-                PasswordVaultPassword.Dispose ();
-                PasswordVaultPassword = null;
+            if (DeleteOriginal != null) {
+                DeleteOriginal.Dispose ();
+                DeleteOriginal = null;
             }
         }
     }

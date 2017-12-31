@@ -4,6 +4,7 @@
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+        <capability name="system font weights other than Regular or Bold" minToolsVersion="7.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MainWindowController">
@@ -11,7 +12,16 @@
                 <outlet property="AmountColumn" destination="V0N-Pu-7ok" id="lND-kF-9Te"/>
                 <outlet property="AmountDollar" destination="BpL-pI-eFD" id="93J-xy-3uJ"/>
                 <outlet property="BalanceNumberLabel" destination="3Uo-Yw-I6R" id="7Rx-eR-1zM"/>
+                <outlet property="CryptoDocDecryptButton" destination="2du-Kh-BJp" id="Wr8-zX-Rqy"/>
+                <outlet property="CryptoDocDecryptButtonClick" destination="2du-Kh-BJp" id="PjB-m4-gWS"/>
+                <outlet property="CryptoDocEncryptButton" destination="qM5-aJ-xKO" id="grM-ku-rJd"/>
+                <outlet property="CryptoDocOpenButtonClick" destination="qM5-aJ-xKO" id="tGj-tR-Fsy"/>
+                <outlet property="CryptoDocPassword" destination="KbB-vo-jbF" id="02S-gN-tYd"/>
+                <outlet property="CryptoDocTabView" destination="bdq-x0-BPr" id="iCd-Xk-idv"/>
                 <outlet property="DateColumn" destination="qyW-O3-fjX" id="Vqk-jx-YOp"/>
+                <outlet property="DeleteEncrypted" destination="ZpI-4t-CJI" id="KgY-4C-fc1"/>
+                <outlet property="DeleteEnctrypted" destination="ZpI-4t-CJI" id="f0z-Kr-ZGW"/>
+                <outlet property="DeleteOriginal" destination="T10-Nd-SVy" id="dbe-Oe-IO0"/>
                 <outlet property="EOTLogoReceive" destination="dlK-BI-tXL" id="l6l-Gx-dCQ"/>
                 <outlet property="EOTLogoSend" destination="obW-e9-xxB" id="ikj-ZE-HvH"/>
                 <outlet property="ExportEOTLogo" destination="0n0-Th-ZIo" id="bhf-mo-Z8D"/>
@@ -273,7 +283,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <clipView key="contentView" id="ELm-Lf-N0u">
                                                 <rect key="frame" x="1" y="0.0" width="804" height="173"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <autoresizingMask key="autoresizingMask"/>
                                                 <subviews>
                                                     <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="C0Y-bN-we0" id="K9s-Ug-cy6">
                                                         <rect key="frame" x="0.0" y="0.0" width="804" height="150"/>
@@ -500,14 +510,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <clipView key="contentView" id="ifF-M5-Xeo">
                                                 <rect key="frame" x="1" y="1" width="802" height="241"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <autoresizingMask key="autoresizingMask"/>
                                                 <subviews>
                                                     <textView importsGraphics="NO" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="JqU-nN-R4e">
                                                         <rect key="frame" x="0.0" y="0.0" width="802" height="241"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <size key="minSize" width="802" height="241"/>
-                                                        <size key="maxSize" width="802" height="10000000"/>
+                                                        <size key="maxSize" width="804" height="10000000"/>
                                                         <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                     </textView>
                                                 </subviews>
@@ -544,6 +554,102 @@
                                                 <action selector="EncryptButtonClick:" target="-2" id="aQm-aQ-b71"/>
                                             </connections>
                                         </button>
+                                    </subviews>
+                                </view>
+                            </tabViewItem>
+                            <tabViewItem label="Crypto Doc" identifier="5" id="bdq-x0-BPr" userLabel="CryptoDoc">
+                                <view key="view" id="lxM-wd-Pwc">
+                                    <rect key="frame" x="10" y="33" width="816" height="319"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button misplaced="YES" id="2du-Kh-BJp">
+                                            <rect key="frame" x="566" y="158" width="85" height="71"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="s9c-tA-9rT">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="CryptoDocDecryptButtonClick:" target="-2" id="aLJ-bG-HcE"/>
+                                            </connections>
+                                        </button>
+                                        <button misplaced="YES" id="qM5-aJ-xKO">
+                                            <rect key="frame" x="208" y="151" width="84" height="70"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" alignment="center" borderStyle="border" imageScaling="proportionallyUpOrDown" inset="2" id="gFk-vo-N6B">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="CryptoDocOpenButtonClick:" target="-2" id="3R3-iV-p5D"/>
+                                            </connections>
+                                        </button>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" id="Zni-m8-gDm">
+                                            <rect key="frame" x="15" y="109" width="190" height="153"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="7C3-Ki-8iR">
+                                                <font key="font" metaFont="system"/>
+                                                <string key="title">Click on the lock image to selct a File that you want to Encrypt. This will create an encrypted version of the File in the same folder. If you want to delete the original file after encryption click on the Delete File after encryption check box</string>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" id="hjD-FC-t4r">
+                                            <rect key="frame" x="370" y="109" width="190" height="153"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="of5-6l-Wu3">
+                                                <font key="font" metaFont="system"/>
+                                                <string key="title">Click on the unlock image to selct a File that you want to Decrypt. This will recover your original unencrypted version of the File in the same folder. If you want to delete the encrypted file after decryption click on the Delete File after decryption check box</string>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <button misplaced="YES" id="T10-Nd-SVy">
+                                            <rect key="frame" x="46" y="85" width="248" height="18"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="check" title="Delete Original File after encryption" bezelStyle="regularSquare" imagePosition="left" inset="2" id="60O-MO-fXz">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                        </button>
+                                        <button misplaced="YES" id="ZpI-4t-CJI">
+                                            <rect key="frame" x="393" y="87" width="253" height="18"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="check" title="Delete Encrypted File after decryption" bezelStyle="regularSquare" imagePosition="left" inset="2" id="jKj-wZ-6f8">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                        </button>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" id="AiU-qj-Vrh">
+                                            <rect key="frame" x="55" y="290" width="746" height="17"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="When Experimenting wiith this software for the first time, please ensure you keep backup copies of your files!" id="8oQ-Et-6jE">
+                                                <font key="font" metaFont="systemHeavy" size="13"/>
+                                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <secureTextField verticalHuggingPriority="750" misplaced="YES" id="KbB-vo-jbF">
+                                            <rect key="frame" x="328" y="32" width="180" height="22"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" usesSingleLineMode="YES" id="LWc-NR-A2u">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                <allowedInputSourceLocales>
+                                                    <string>NSAllRomanInputSourcesLocaleIdentifier</string>
+                                                </allowedInputSourceLocales>
+                                            </secureTextFieldCell>
+                                        </secureTextField>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" id="iTq-9r-wjL">
+                                            <rect key="frame" x="233" y="35" width="89" height="17"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Password:" id="vBa-VN-jfM">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
                                     </subviews>
                                 </view>
                             </tabViewItem>

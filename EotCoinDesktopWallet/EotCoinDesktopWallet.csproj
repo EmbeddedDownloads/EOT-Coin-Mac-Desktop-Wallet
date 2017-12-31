@@ -156,6 +156,8 @@
   <ItemGroup>
     <BundleResource Include="Resources\EOT-3.png" />
     <BundleResource Include="Resources\alert.png" />
+    <BundleResource Include="Resources\locked-2.png" />
+    <BundleResource Include="Resources\locked.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
   <Import Project="..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets')" />
